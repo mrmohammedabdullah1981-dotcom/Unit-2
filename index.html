@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Influential People - Vocabulary & Interactive Quiz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0f3d3e;
+      --secondary: #d4af37;
+      --accent: #2563eb;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --success: #16a34a;
+      --danger: #dc2626;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Cairo', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding-bottom: 60px;
+    }
+
+    .en {
+      font-family: 'Poppins', sans-serif;
+      direction: ltr;
+      text-align: left;
+    }
+
+    .ar {
+      font-family: 'Cairo', sans-serif;
+      direction: rtl;
+      text-align: right;
+    }
+
+    header {
+      background: linear-gradient(135deg, #092525 0%, #0f3d3e 50%, #164e63 100%);
+      color: #fff;
+      padding: 40px 20px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      position: relative;
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+      color: #f8fafc;
+      font-weight: 800;
+    }
+
+    header h2 {
+      font-size: 1.3rem;
+      color: var(--secondary);
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      margin-bottom: 15px;
+      letter-spacing: 0.5px;
+    }
+
+    .teacher-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 15px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      padding: 10px 25px;
+      border-radius: 50px;
+      margin-top: 10px;
+      backdrop-filter: blur(5px);
+    }
+
+    .teacher-badge span {
+      font-weight: 600;
+      color: #fef08a;
+      font-size: 1.05rem;
+    }
+
+    .teacher-badge a {
+      color: #fff;
+      text-decoration: none;
+      direction: ltr;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      background: rgba(0,0,0,0.25);
+      padding: 3px 12px;
+      border-radius: 20px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    .nav-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      background: #fff;
+      border: 2px solid var(--border);
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      color: var(--text);
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+    }
+
+    .tab-btn:hover {
+      border-color: var(--secondary);
+      transform: translateY(-2px);
+    }
+
+    .tab-btn.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+      box-shadow: 0 4px 12px rgba(15, 61, 62, 0.3);
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin: 35px 0 20px;
+      padding-bottom: 10px;
+      border-bottom: 3px solid var(--secondary);
+    }
+
+    .vocab-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      border: 1px solid var(--border);
+      border-top: 5px solid var(--primary);
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      border-top-color: var(--secondary);
+    }
+
+    .card-header-term {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px dashed var(--border);
+    }
+
+    .term-en {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary);
+      direction: ltr;
+      text-align: left;
+    }
+
+    .term-ar {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #995c00;
+      direction: rtl;
+      text-align: right;
+    }
+
+    .card-body {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .example-en {
+      font-family: 'Poppins', sans-serif;
+      direction: ltr;
+      text-align: left;
+      color: #334155;
+      font-size: 0.95rem;
+      background: #f1f5f9;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border-left: 4px solid var(--accent);
+    }
+
+    .example-ar {
+      direction: rtl;
+      text-align: right;
+      color: #475569;
+      font-size: 0.95rem;
+      padding: 4px 6px;
+      font-weight: 600;
+    }
+
+    /* Quiz Styling */
+    .quiz-container {
+      background: #fff;
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      border: 1px solid var(--border);
+    }
+
+    .q-card {
+      margin-bottom: 25px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .q-card:last-child {
+      border-bottom: none;
+    }
+
+    .q-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+      color: var(--primary);
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    @media (min-width: 640px) {
+      .options-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .opt-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      border-radius: 10px;
+      border: 2px solid var(--border);
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: all 0.2s;
+    }
+
+    .opt-label:hover {
+      background-color: #f8fafc;
+      border-color: #cbd5e1;
+    }
+
+    .opt-label input[type="radio"] {
+      accent-color: var(--primary);
+      width: 18px;
+      height: 18px;
+    }
+
+    .quiz-actions {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .btn-submit {
+      background: linear-gradient(135deg, var(--primary) 0%, #1e5e5f 100%);
+      color: #fff;
+      font-family: 'Cairo', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      padding: 14px 45px;
+      border: none;
+      border-radius: 35px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(15, 61, 62, 0.35);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(15, 61, 62, 0.45);
+    }
+
+    #score-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.65);
+      backdrop-filter: blur(4px);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      padding: 20px;
+    }
+
+    .modal-box {
+      background: #fff;
+      padding: 35px;
+      border-radius: 20px;
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+      animation: popIn 0.3s ease-out;
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.85); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .score-circle {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: #eff6ff;
+      border: 5px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .btn-close {
+      margin-top: 20px;
+      background: var(--text);
+      color: #fff;
+      border: none;
+      padding: 10px 25px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .correct-opt {
+      border-color: var(--success) !important;
+      background-color: #f0fdf4 !important;
+    }
+
+    .wrong-opt {
+      border-color: var(--danger) !important;
+      background-color: #fef2f2 !important;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>الوحدة الثانية: الشخصيات المؤثرة</h1>
+    <h2>Unit 2: Influential People - Vocabulary & Expressions</h2>
+    <div class="teacher-badge">
+      <span>إعداد المعلم / Mohammed Othman</span>
+      <a href="tel:0530665625">📞 0530665625</a>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="nav-tabs">
+      <button class="tab-btn active" onclick="showTab('study')">📖 قاموس المفردات والجمل</button>
+      <button class="tab-btn" onclick="showTab('quiz')">✍️ الاختبار الإلكتروني وبنك الأسئلة</button>
+    </div>
+
+    <!-- TAB 1: STUDY VOCABULARY -->
+    <div id="tab-study">
+      
+      <!-- Nouns -->
+      <h3 class="section-title">📌 الأسماء (Nouns)</h3>
+      <div class="vocab-grid">
+        
+        <div class="card">
+          <div class="card-header-term">
+            <span class="term-en">Asset</span>
+            <span class="term-ar">أصل / ميزة قيّمة</span>
+          </div>
+          <div class="card-body">
+            <div class="example-en">His honesty is his greatest asset.</div>
+            <div class="example-ar">صدقه هو أعظم ميزة لديه.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header-term">
+            <span class="term-en">Charity</span>
+            <span class="term-ar">جمعية خيرية / عمل خيري</span>
+          </div>
+          <div class="card-body">
+            <div class="example-en">She gives money to charity.</div>
+            <div class="example-ar">هي تتبرع بالمال للجمعيات الخيرية.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header-term">
+            <span class="term-en">Dispute</span>
+            <span class="term-ar">نزاع / خلاف</span>
+          </div>
+          <div class="card-body">
+            <div class="example-en">The two neighbors had a dispute.</div>
+            <div class="example-ar">حدث خلاف بين الجارين.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header-term">
+            <span class="term-en">Endowment</span>
+            <span class="term-ar">هبة / وقف مالي</span>
+          </div>
+          <div class="card-body">
+            <div class="example-en">The university received a huge endowment.</div>
+            <div class="example-ar">تلقت الجامعة وقفاً مالياً ضخماً.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header-term">
+            <span class="term-en">Founder</span>
+            <span class="term-ar">مؤسس</span>
+          </div>
+          <div class="card-body">
+            <div class="example-en">He is the founder of the company.</div>
+            <div class="example-ar">هو مؤسس الشركة.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header-term">
+            <span class="term-en">Foresight</span>
+            <span class="term-ar">بُعد نظر / حُسن تقدير</span>
+          </div>
+          <div class="card-body">
+            <div class="example-en">She had the foresight to save early.</div>
+            <div class="example-ar">كان لديها بُعد نظر للادخار مبكراً.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header-term">
+            <span class="term-en">Hurdle</span>
+            <span class="term-ar">عقبة / حاجز</span>
+          </div>
+          <div class="card-body">
+            <div class="example-en">We overcame the first hurdle.</div>
+            <div class="example-ar">لقد تجاوزنا العقبة الأولى.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header-term">
+            <span class="term-en">Inventory</span>
+            <span class="term-ar">مخزون / قائمة جرد</span>
+          </div>
+          <div class="card-body">
+            <div class="example-en">The shop takes inventory once a month.</div>
+            <div class="example-ar">يقوم المتجر بجرد البضائع مرة كل شهر.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header-term">
+            <span class="term-en">Obscurity</span>
+            <span class="term-ar">غموض / حالة عدم الشهرة أو النسيان</span>
+          </div>
+          <div class="card-body">
+            <div class="example-en">He lived in obscurity before becoming famous.</div>
+            <div class="example-ar">عاش في الظل وعدم الشهرة قبل أن يصبح معروفاً.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header-term">
+            <span class="term-en">Phenomenon</span>
+            <span class="term-ar">ظاهرة</span>
+          </div>
+          <div class="card-body">
+            <div class="example-en">Gravity is a natural phenomenon.</div>
+            <div class="example-ar">الجاذبية ظاهرة طبيعية.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header-term">
+            <span class="term-en">Philanthropist</span>
+            <span class="term-ar">فاعل خير / محب للخير</span>
+          </div>
+          <div class="card-body">
+            <div class="example-en">The philanthropist built a new hospital.</div>
+            <div class="example-ar">بنى فاعل الخير مستشفى جديداً.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header-term">
+            <span class="term-en">Poverty</span>
+            <span class="term-ar">فقر</span>
+          </div>
+          <div class="card-body">
+            <div class="example-en">Education helps fight poverty.</div>
+            <div class="example-ar">التعليم يساعد في مكافحة الفقر.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header-term">
+            <span class="term-en">Reputation</span>
+            <span class="term-ar">سمعة</span>
+          </div>
+          <div class="card-body">
+            <div class="example-en">The restaurant has a good reputation.</div>
+            <div class="example-ar">المطعم يتمتع بسمعة جيدة.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header-term">
+            <span class="term-en">Wealth</span>
+            <span class="term-ar">ثروة</span>
+          </div>
+          <div class="card-body">
+            <div class="example-en">Health is real wealth.</div>
+            <div class="example-ar">الصحة هي الثروة الحقيقية.</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Verbs -->
+      <h3 class="section-title">📌 الأفعال (Verbs)</h3>
+      <div class="vocab-grid">
+        
+        <div class="card">
+          <div class="card-header-term">
+            <span class="term-en">Assemble</span>
+            <span class="term-ar">يُجمّع / يحشد</span>
+          </div>
+          <div class="card-body">
+            <div class="example-en">He can assemble the chair easily.</div>
+            <div class="example-ar">يستطيع تجميع الكرسي بسهولة.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header-term">
+            <span class="term-en">Compile</span>
+            <span class="term-ar">يجمع / يصنّف بيانات</span>
+          </div>
+          <div class="card-body">
+            <div class="example-en">She will compile the report today.</div>
+            <div class="example-ar">ستقوم بجمع وإعداد التقرير اليوم.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header-term">
+            <span class="term-en">Comply with</span>
+            <span class="term-ar">يمتثل لـ / يلتزم بـ</span>
+          </div>
+          <div class="card-body">
+            <div class="example-en">You must comply with the rules.</div>
+            <div class="example-ar">يجب أن تلتزم بالقواعد.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header-term">
+            <span class="term-en">Dismantle</span>
+            <span class="term-ar">يفكك</span>
+          </div>
+          <div class="card-body">
+            <div class="example-en">Workers dismantle the tent after the event.</div>
+            <div class="example-ar">يفكك العمال الخيمة بعد انتهاء الفعالية.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header-term">
+            <span class="term-en">Excel</span>
+            <span class="term-ar">يتفوّق / يبرع</span>
+          </div>
+          <div class="card-body">
+            <div class="example-en">She excels in mathematics.</div>
+            <div class="example-ar">هي تتفوق في الرياضيات.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header-term">
+            <span class="term-en">Implement</span>
+            <span class="term-ar">ينفّذ / يُطبّق</span>
+          </div>
+          <div class="card-body">
+            <div class="example-en">We need to implement the new plan.</div>
+            <div class="example-ar">نحتاج إلى تطبيق الخطة الجديدة.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header-term">
+            <span class="term-en">Prosper</span>
+            <span class="term-ar">يزدهر / ينجح</span>
+          </div>
+          <div class="card-body">
+            <div class="example-en">Small businesses prosper in this city.</div>
+            <div class="example-ar">تزدهر الأعمال الصغيرة في هذه المدينة.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header-term">
+            <span class="term-en">Resign</span>
+            <span class="term-ar">يستقيل</span>
+          </div>
+          <div class="card-body">
+            <div class="example-en">The manager decided to resign.</div>
+            <div class="example-ar">قرر المدير أن يستقيل.</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Adjectives & Adverbs -->
+      <h3 class="section-title">📌 الصفات والظروف (Adjectives & Adverb)</h3>
+      <div class="vocab-grid">
+        
+        <div class="card">
+          <div class="card-header-term">
+            <span class="term-en">Formal</span>
+            <span class="term-ar">رسمي</span>
+          </div>
+          <div class="card-body">
+            <div class="example-en">Wear formal clothes to the meeting.</div>
+            <div class="example-ar">ارتدِ ملابس رسمية للاجتماع.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header-term">
+            <span class="term-en">Impoverished</span>
+            <span class="term-ar">مُفقر / فقير جداً</span>
+          </div>
+          <div class="card-body">
+            <div class="example-en">Aid reached the impoverished area.</div>
+            <div class="example-ar">وصلت المساعدات إلى المنطقة الفقيرة جداً.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header-term">
+            <span class="term-en">Influential</span>
+            <span class="term-ar">مؤثر / ذو نفوذ</span>
+          </div>
+          <div class="card-body">
+            <div class="example-en">He is an influential writer.</div>
+            <div class="example-ar">هو كاتب مؤثر.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header-term">
+            <span class="term-en">Materialistic</span>
+            <span class="term-ar">مادي / محب للماديات</span>
+          </div>
+          <div class="card-body">
+            <div class="example-en">He is not a materialistic person.</div>
+            <div class="example-ar">هو ليس شخصاً مادياً.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header-term">
+            <span class="term-en">Overwhelming</span>
+            <span class="term-ar">ساحق / طاغٍ / لا يُقاوم</span>
+          </div>
+          <div class="card-body">
+            <div class="example-en">The support was overwhelming.</div>
+            <div class="example-ar">كان الدعم طاغياً وهائلاً.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header-term">
+            <span class="term-en">Prominent</span>
+            <span class="term-ar">بارز / شهير</span>
+          </div>
+          <div class="card-body">
+            <div class="example-en">She is a prominent scientist.</div>
+            <div class="example-ar">إنها عالمة بارزة.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header-term">
+            <span class="term-en">Reasonable</span>
+            <span class="term-ar">معقول / منطقي</span>
+          </div>
+          <div class="card-body">
+            <div class="example-en">The price is very reasonable.</div>
+            <div class="example-ar">السعر معقول جداً.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header-term">
+            <span class="term-en">Renowned</span>
+            <span class="term-ar">مشهور / ذائع الصيت</span>
+          </div>
+          <div class="card-body">
+            <div class="example-en">This is a renowned university.</div>
+            <div class="example-ar">هذه جامعة ذائعة الصيت.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header-term">
+            <span class="term-en">Rural</span>
+            <span class="term-ar">ريفي</span>
+          </div>
+          <div class="card-body">
+            <div class="example-en">They live in a quiet rural village.</div>
+            <div class="example-ar">هم يعيشون في قرية ريفية هادئة.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header-term">
+            <span class="term-en">Enormously</span>
+            <span class="term-ar">بشكل هائل / للغاية</span>
+          </div>
+          <div class="card-body">
+            <div class="example-en">The project was enormously successful.</div>
+            <div class="example-ar">كان المشروع ناجحاً بشكل هائل.</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Real Talk -->
+      <h3 class="section-title">📌 تعبيرات الحديث اليومي (Real Talk)</h3>
+      <div class="vocab-grid">
+        
+        <div class="card">
+          <div class="card-header-term">
+            <span class="term-en">Cash</span>
+            <span class="term-ar">أموال نقدية / كاش</span>
+          </div>
+          <div class="card-body">
+            <div class="example-en">I don't have cash on me right now.</div>
+            <div class="example-ar">ليس لدي أموال نقدية معي الآن.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header-term">
+            <span class="term-en">Go (around) in circles</span>
+            <span class="term-ar">يدور في حلقة مفرغة</span>
+          </div>
+          <div class="card-body">
+            <div class="example-en">We are just going in circles; let's make a choice.</div>
+            <div class="example-ar">نحن ندور في حلقة مفرغة؛ فلنتخذ قراراً.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header-term">
+            <span class="term-en">Drive someone crazy</span>
+            <span class="term-ar">يجعل الشخص يستشيط غضباً / يثير جنونه</span>
+          </div>
+          <div class="card-body">
+            <div class="example-en">That loud noise drives me crazy.</div>
+            <div class="example-ar">ذلك الصوت المرتفع يثير جنوني.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header-term">
+            <span class="term-en">Get cold feet</span>
+            <span class="term-ar">يتردد خوفاً وتوتراً قبل الإقدام</span>
+          </div>
+          <div class="card-body">
+            <div class="example-en">He wanted to jump, but he got cold feet.</div>
+            <div class="example-ar">أراد أن يقفز، لكنه تراجع في آخر لحظة بسبب الخوف.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header-term">
+            <span class="term-en">Don't mind</span>
+            <span class="term-ar">لا يمانع / لا يضايقه الأمر</span>
+          </div>
+          <div class="card-body">
+            <div class="example-en">I don't mind waiting for a few minutes.</div>
+            <div class="example-ar">لا أمانع الانتظار لبضع دقائق.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header-term">
+            <span class="term-en">Put aside for a rainy day</span>
+            <span class="term-ar">يدخر مالاً لوقت الحاجة والظروف</span>
+          </div>
+          <div class="card-body">
+            <div class="example-en">Save some money aside for a rainy day.</div>
+            <div class="example-ar">ادخر بعض المال لوقت الحاجة والظروف الصعبة.</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Discussing Options -->
+      <h3 class="section-title">📌 عبارات مناقشة الخيارات (Discussing Options)</h3>
+      <div class="vocab-grid">
+        
+        <div class="card">
+          <div class="card-header-term">
+            <span class="term-en">At the same time,...</span>
+            <span class="term-ar">في الوقت ذاته...</span>
+          </div>
+          <div class="card-body">
+            <div class="example-en">I like this car; at the same time, it is expensive.</div>
+            <div class="example-ar">تعجبني هذه السيارة؛ وفي الوقت ذاته هي باهظة الثمن.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header-term">
+            <span class="term-en">But then again,...</span>
+            <span class="term-ar">ولكن بعد إعادة التفكير...</span>
+          </div>
+          <div class="card-body">
+            <div class="example-en">We could walk, but then again, it might rain.</div>
+            <div class="example-ar">يمكننا المشي، ولكن بعد إعادة التفكير قد تمطر.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header-term">
+            <span class="term-en">I could always...</span>
+            <span class="term-ar">بإمكاني دوماً أن...</span>
+          </div>
+          <div class="card-body">
+            <div class="example-en">I could always call a taxi if I miss the bus.</div>
+            <div class="example-ar">بإمكاني دوماً أن أطلب سيارة أجرة إذا فاتتني الحافلة.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header-term">
+            <span class="term-en">On the other hand,...</span>
+            <span class="term-ar">من ناحية أخرى...</span>
+          </div>
+          <div class="card-body">
+            <div class="example-en">The job pays well; on the other hand, the hours are long.</div>
+            <div class="example-ar">الراتب ممتاز؛ ومن ناحية أخرى ساعات العمل طويلة.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header-term">
+            <span class="term-en">The alternative would be to...</span>
+            <span class="term-ar">البديل سيكون أن...</span>
+          </div>
+          <div class="card-body">
+            <div class="example-en">The alternative would be to take the train.</div>
+            <div class="example-ar">البديل سيكون أن نأخذ القطار.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header-term">
+            <span class="term-en">What would you think about...?</span>
+            <span class="term-ar">ما رأيك لو...؟</span>
+          </div>
+          <div class="card-body">
+            <div class="example-en">What would you think about eating out tonight?</div>
+            <div class="example-ar">ما رأيك لو تناولنا العشاء في الخارج الليلة؟</div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- TAB 2: INTERACTIVE QUIZ & QUESTION BANK -->
+    <div id="tab-quiz" style="display: none;">
+      <div class="quiz-container">
+        <h3 style="color: var(--primary); font-size: 1.6rem; margin-bottom: 8px;">الاختبار الإلكتروني الشامل (Quiz)</h3>
+        <p style="color: var(--text-muted); margin-bottom: 25px;">اختر الإجابة الصحيحة لكل سؤال لاختبار مدى استيعابك للمفردات والتعبيرات:</p>
+
+        <form id="quiz-form">
+          
+          <!-- Q1 -->
+          <div class="q-card" data-q="1" data-correct="B">
+            <div class="q-title">1. A person who donates money and helps people in need is called a:</div>
+            <div class="options-grid">
+              <label class="opt-label"><input type="radio" name="q1" value="A"> A) founder</label>
+              <label class="opt-label"><input type="radio" name="q1" value="B"> B) philanthropist</label>
+              <label class="opt-label"><input type="radio" name="q1" value="C"> C) hurdle</label>
+              <label class="opt-label"><input type="radio" name="q1" value="D"> D) phenomenon</label>
+            </div>
+          </div>
+
+          <!-- Q2 -->
+          <div class="q-card" data-q="2" data-correct="C">
+            <div class="q-title">2. When you decide not to do something because you are too nervous or scared, you:</div>
+            <div class="options-grid">
+              <label class="opt-label"><input type="radio" name="q2" value="A"> A) go in circles</label>
+              <label class="opt-label"><input type="radio" name="q2" value="B"> B) comply with</label>
+              <label class="opt-label"><input type="radio" name="q2" value="C"> C) get cold feet</label>
+              <label class="opt-label"><input type="radio" name="q2" value="D"> D) don't mind</label>
+            </div>
+          </div>
+
+          <!-- Q3 -->
+          <div class="q-card" data-q="3" data-correct="A">
+            <div class="q-title">3. To reserve money for an unexpected future emergency means to put something aside for:</div>
+            <div class="options-grid">
+              <label class="opt-label"><input type="radio" name="q3" value="A"> A) a rainy day</label>
+              <label class="opt-label"><input type="radio" name="q3" value="B"> B) a circle</label>
+              <label class="opt-label"><input type="radio" name="q3" value="C"> C) a dispute</label>
+              <label class="opt-label"><input type="radio" name="q3" value="D"> D) a founder</label>
+            </div>
+          </div>
+
+          <!-- Q4 -->
+          <div class="q-card" data-q="4" data-correct="D">
+            <div class="q-title">4. To follow and obey official rules and regulations is to:</div>
+            <div class="options-grid">
+              <label class="opt-label"><input type="radio" name="q4" value="A"> A) dismantle</label>
+              <label class="opt-label"><input type="radio" name="q4" value="B"> B) resign</label>
+              <label class="opt-label"><input type="radio" name="q4" value="C"> C) prosper</label>
+              <label class="opt-label"><input type="radio" name="q4" value="D"> D) comply with</label>
+            </div>
+          </div>
+
+          <!-- Q5 -->
+          <div class="q-card" data-q="5" data-correct="B">
+            <div class="q-title">5. An area that lacks basic wealth and resources is described as:</div>
+            <div class="options-grid">
+              <label class="opt-label"><input type="radio" name="q5" value="A"> A) renowned</label>
+              <label class="opt-label"><input type="radio" name="q5" value="B"> B) impoverished</label>
+              <label class="opt-label"><input type="radio" name="q5" value="C"> C) formal</label>
+              <label class="opt-label"><input type="radio" name="q5" value="D"> D) materialistic</label>
+            </div>
+          </div>
+
+          <!-- Q6 -->
+          <div class="q-card" data-q="6" data-correct="A">
+            <div class="q-title">6. Thinking through options repeatedly without reaching a decision is:</div>
+            <div class="options-grid">
+              <label class="opt-label"><input type="radio" name="q6" value="A"> A) going around in circles</label>
+              <label class="opt-label"><input type="radio" name="q6" value="B"> B) driving someone crazy</label>
+              <label class="opt-label"><input type="radio" name="q6" value="C"> C) getting cold feet</label>
+              <label class="opt-label"><input type="radio" name="q6" value="D"> D) putting aside</label>
+            </div>
+          </div>
+
+          <!-- Q7 -->
+          <div class="q-card" data-q="7" data-correct="C">
+            <div class="q-title">7. The antonym of "assemble" (to put pieces together) is:</div>
+            <div class="options-grid">
+              <label class="opt-label"><input type="radio" name="q7" value="A"> A) compile</label>
+              <label class="opt-label"><input type="radio" name="q7" value="B"> B) implement</label>
+              <label class="opt-label"><input type="radio" name="q7" value="C"> C) dismantle</label>
+              <label class="opt-label"><input type="radio" name="q7" value="D"> D) excel</label>
+            </div>
+          </div>
+
+          <!-- Q8 -->
+          <div class="q-card" data-q="8" data-correct="D">
+            <div class="q-title">8. If someone is well-known and widely famous, they are:</div>
+            <div class="options-grid">
+              <label class="opt-label"><input type="radio" name="q8" value="A"> A) in obscurity</label>
+              <label class="opt-label"><input type="radio" name="q8" value="B"> B) rural</label>
+              <label class="opt-label"><input type="radio" name="q8" value="C"> C) materialistic</label>
+              <label class="opt-label"><input type="radio" name="q8" value="D"> D) renowned</label>
+            </div>
+          </div>
+
+          <!-- Q9 -->
+          <div class="q-card" data-q="9" data-correct="B">
+            <div class="q-title">9. When you want to present another contrasting side of an argument, you can say:</div>
+            <div class="options-grid">
+              <label class="opt-label"><input type="radio" name="q9" value="A"> A) I don't mind</label>
+              <label class="opt-label"><input type="radio" name="q9" value="B"> B) On the other hand,...</label>
+              <label class="opt-label"><input type="radio" name="q9" value="C"> C) Cash only</label>
+              <label class="opt-label"><input type="radio" name="q9" value="D"> D) It drives me crazy</label>
+            </div>
+          </div>
+
+          <!-- Q10 -->
+          <div class="q-card" data-q="10" data-correct="A">
+            <div class="q-title">10. The ability to predict what will happen in the future and plan wisely is:</div>
+            <div class="options-grid">
+              <label class="opt-label"><input type="radio" name="q10" value="A"> A) foresight</label>
+              <label class="opt-label"><input type="radio" name="q10" value="B"> B) endowment</label>
+              <label class="opt-label"><input type="radio" name="q10" value="C"> C) dispute</label>
+              <label class="opt-label"><input type="radio" name="q10" value="D"> D) poverty</label>
+            </div>
+          </div>
+
+          <div class="quiz-actions">
+            <button type="button" class="btn-submit" onclick="submitQuiz()">تصحيح الاختبار وعرض النتيجة 🚀</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Score Modal -->
+  <div id="score-modal">
+    <div class="modal-box">
+      <div class="score-circle" id="score-display">0/10</div>
+      <h3 id="score-msg" style="color: var(--primary); margin-bottom: 10px;">نتيجة الاختبار</h3>
+      <p id="score-sub" style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px;">تم تصحيح الإجابات، يمكنك مراجعة الأسئلة بالأسفل لمعرفة الإجابات الصحيحة.</p>
+      <button class="btn-close" onclick="closeModal()">مراجعة الإجابات</button>
+    </div>
+  </div>
+
+  <script>
+    function showTab(tab) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      if(tab === 'study') {
+        document.getElementById('tab-study').style.display = 'block';
+        document.getElementById('tab-quiz').style.display = 'none';
+        event.target.classList.add('active');
+      } else {
+        document.getElementById('tab-study').style.display = 'none';
+        document.getElementById('tab-quiz').style.display = 'block';
+        event.target.classList.add('active');
+      }
+    }
+
+    function submitQuiz() {
+      const qCards = document.querySelectorAll('.q-card');
+      let score = 0;
+      let total = qCards.length;
+
+      qCards.forEach(card => {
+        const correct = card.getAttribute('data-correct');
+        const qNum = card.getAttribute('data-q');
+        const selected = card.querySelector(`input[name="q${qNum}"]:checked`);
+        const labels = card.querySelectorAll('.opt-label');
+
+        labels.forEach(lbl => {
+          lbl.classList.remove('correct-opt', 'wrong-opt');
+        });
+
+        if (selected) {
+          if (selected.value === correct) {
+            score++;
+            selected.parentElement.classList.add('correct-opt');
+          } else {
+            selected.parentElement.classList.add('wrong-opt');
+            labels.forEach(lbl => {
+              if (lbl.querySelector('input').value === correct) {
+                lbl.classList.add('correct-opt');
+              }
+            });
+          }
+        } else {
+          labels.forEach(lbl => {
+            if (lbl.querySelector('input').value === correct) {
+              lbl.classList.add('correct-opt');
+            }
+          });
+        }
+      });
+
+      document.getElementById('score-display').innerText = `${score}/${total}`;
+      const msg = document.getElementById('score-msg');
+      if (score === total) {
+        msg.innerText = "ممتاز جداً! علامة كاملة 🌟";
+      } else if (score >= total * 0.7) {
+        msg.innerText = "أحسنت! أداء رائع جداً 👏";
+      } else {
+        msg.innerText = "محاولة جيدة، راجع الكلمات وحاول مرة أخرى 💪";
+      }
+
+      document.getElementById('score-modal').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('score-modal').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
